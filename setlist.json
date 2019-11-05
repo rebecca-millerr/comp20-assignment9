@@ -1,0 +1,62 @@
+[
+    {
+        "title" : "King Kunta",
+        "artist" : ["Kendrick Lamar"],
+        "genre" : ["Rap"],
+        "year" : "2015"
+    },
+    {
+        "title" : "Wannabe",
+        "artist" : ["Spice Girls"],
+        "genre" : ["Pop"],
+        "year" : "1996"
+    },
+    {
+        "title" : "The Middle",
+        "artist" : ["Jimmy Eat World"],
+        "genre" : ["Rock"],
+        "year" : "2001"
+    },
+    {
+        "title" : "It's Tricky",
+        "artist" : ["Run-D.M.C."],
+        "genre" : ["Rap"],
+        "year" : "1998"
+    },
+    {
+        "title" : "Hold Me Down",
+        "artist" : ["Halsey"],
+        "genre" : ["Pop"],
+        "year" : "2015"
+    },
+    {
+        "title" : "I Don't Want to Be",
+        "artist" : ["Gavin DeGraw"],
+        "genre" : ["Rock", "Pop"],
+        "year" : "2004"
+    },
+    {
+        "title" : "Collide",
+        "artist" : ["Howie Day"],
+        "genre" : ["Alternative"],
+        "year" : "2003"
+    },
+    {
+        "title" : "Jesus of Suburbia",
+        "artist" : ["Green Day"],
+        "genre" : ["Rock"],
+        "year" : "2004"
+    },
+    {
+        "title" : "Heart",
+        "artist" : ["flor"],
+        "genre" : ["Pop"],
+        "year" : "2015"
+    },
+    {
+        "title" : "Fourth of July",
+        "artist" : ["Fall Out Boy"],
+        "genre" : ["Rock"],
+        "year" : "2015"
+    }
+]
