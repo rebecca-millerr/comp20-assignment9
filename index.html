@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Assignment 9</title>
+        <meta charset="utf-8"/>
+        <style>
+            .container {
+                text-align: center;
+
+            }
+        </style>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+            /*************** JSON OBJECT ***************/
+            
+            let data = [
+                {
+                    "title"  : "King Kunta",
+                    "artist" : ["Kendrick Lamar"],
+                    "genre"  : ["Rap"],
+                    "year"   : "2015"
+                },
+                {
+                    "title"  : "Wannabe",
+                    "artist" : ["Spice Girls"],
+                    "genre"  : ["Pop"],
+                    "year"   : "1996"
+                },
+                {
+                    "title"  : "The Middle",
+                    "artist" : ["Jimmy Eat World"],
+                    "genre"  : ["Rock"],
+                    "year"   : "2001"
+                },
+                {
+                    "title"  : "It's Tricky",
+                    "artist" : ["Run-D.M.C."],
+                    "genre"  : ["Rap"],
+                    "year"   : "1998"
+                },
+                {
+                    "title"  : "Hold Me Down",
+                    "artist" : ["Halsey"],
+                    "genre"  : ["Pop"],
+                    "year"   : "2015"
+                },
+                {
+                    "title"  : "I Don't Want to Be",
+                    "artist" : ["Gavin DeGraw"],
+                    "genre"  : ["Rock", "Pop"],
+                    "year"   : "2004"
+                },
+                {
+                    "title"  : "Collide",
+                    "artist" : ["Howie Day"],
+                    "genre"  : ["Alternative"],
+                    "year"   : "2003"
+                },
+                {
+                    "title"  : "Jesus of Suburbia",
+                    "artist" : ["Green Day"],
+                    "genre"  : ["Rock"],
+                    "year"   : "2004"
+                },
+                {
+                    "title"  : "Heart",
+                    "artist" : ["flor"],
+                    "genre"  : ["Pop"],
+                    "year"   : "2015"
+                },
+                {
+                    "title"  : "Fourth of July",
+                    "artist" : ["Fall Out Boy"],
+                    "genre"  : ["Rock"],
+                    "year"   : "2015"
+                }
+            ]
+
+            /*************** CONVERTS JSON TO REG JAVASCRIPT ***************/
+
+            let setlist = new Array();
+            let songs = new Array();
+
+            for ( i in data ) {
+                songs[i] = JSON.stringify(data[i]); // makes string
+                setlist.push(JSON.parse(songs[i])); // makes javascript
+            }
+
+            /*************** SETS UP GENRE OPTIONS FROM DATA ***************/
+
+            let genres = new Array();
+
+            for ( let i = 0; i < setlist.length; i++ ) {
+                for ( j in setlist[i].genre ) {
+                    if ( !contains(genres, setlist[i].genre[j]) ) {
+                        genres.push(setlist[i].genre[j]);
+                    }
+                }
+            }
+
+            /*************** SETS UP DROPDOWN OPTIONS ON LOAD ***************/
+
+            $(function() {
+                for ( i in genres ) {
+                    $("#options").append(
+                        $("<option>" + genres[i] + "</option>").attr(
+                            "id", genres[i]
+                        ).attr(
+                            "value", genres[i]
+                        )
+                    );
+                }
+            });
+
+            /*************** HELPER TO CHECK IF VALUE IN ARR ***************/
+            
+            // rets true if value contained in arr, otherwise false
+            function contains(arr, value) {
+                for ( i in arr ) {
+                    if ( arr[i] === value )
+                        return true;
+                }
+
+                return false;
+            }
+
+            /*************** EVENT HANDLER FOR DROPDOWN CHANGE ***************/
+
+            function printList() {
+                let selected = document.getElementById("options").value;
+
+                if ( selected === "" ) {
+                    prettyPrint(setlist);
+                }              
+                else {
+                    prettyPrintPicky(setlist, selected)
+                } 
+            }
+
+            /*************** PRINTS EVERYTHING ***************/
+
+            function prettyPrint(arr) {
+                // clear existing text
+                let text = "";
+
+                for ( i in arr ) {
+                    // add title
+                    text += "<p><b>Title: " + arr[i].title + "</b></p>";
+
+                    // add artist(s)
+                    text += "<p>Artist(s): ";
+                    for ( j in arr[i].artist ) {
+                        text += arr[i].artist[j];
+                        if ( j < arr[i].artist.length - 1 ) {
+                            text += ', ';
+                        }
+                    }
+                    text += " </p>";
+
+                    // add genre(s)
+                    text += "<p>Genre(s): ";
+                    for ( k in arr[i].genre ) {
+                        text += arr[i].genre[k];
+                        if ( k < arr[i].genre.length - 1 ) {
+                            text += ', ';
+                        }
+                    }
+                    text += "</p>"; 
+
+                    // add year
+                    text += "<p>Year: " + arr[i].year + "</p><br>";
+                }
+
+                // print text
+                document.getElementById("list").innerHTML = text;
+            }
+
+            /*************** PRINTS EVERYTHING WITHIN GENRE ***************/
+
+            function prettyPrintPicky(arr, value) {
+                // clear existing text
+                let text = "";
+
+                for ( let i = 0; i < arr.length; i++ ) {
+                    if ( contains(arr[i].genre, value) ) {
+                        // prints title
+                        text += "<p><b>Title: " + arr[i].title + "</b></p>";
+
+                        // prints artist(s)
+                        text += "<p>Artist(s): ";
+                        for ( j in arr[i].artist ) {
+                            text += arr[i].artist[j];
+                            if ( j < arr[i].artist.length - 1 ) {
+                                text += ', ';
+                            }
+                        }
+                        text += " </p>";
+
+                        // prints genre(s)
+                        text += "<p>Genre(s): ";
+                        for ( k in arr[i].genre ) {
+                            text += arr[i].genre[k];
+                            if ( k < arr[i].genre.length - 1 ) {
+                                text += ', ';
+                            }
+                        }
+                        text += "</p>"; 
+
+                        // prints year
+                        text += "<p>Year: " + arr[i].year + "</p><br>";
+                    }
+                }
+                
+                // prints text 
+                document.getElementById("list").innerHTML = text;
+            }
+        </script>
+    </head>
+    <body>
+        <div class = "container">
+            <h1>Setlist Filter</h1>
+            <h3>Click any genre to see songs in that genre, or the default to see all songs!</h3>
+            <select id = "options" onchange = "printList()">
+                <option id = "default" value = "">Choose a genre</option>
+            </select>
+            <p id="list"></p>
+        </div>
+    </body>
+</html>
